@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>Leons Baumeister Tools</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="./js/index.js"></script>
+    <style>
+        .bg-1 {
+            background-color: #1abc9c;
+            color: #ffffff;
+        }
+
+        .container-fluid {
+            padding-bottom: 5px;
+        }
+
+        .main-container {
+            width: fit-content;
+            background-color: #474e5d;
+            color: #aaaaaa;
+        }
+
+        html,
+        body {
+            height: 100%;
+            background-color: #474e5d;
+        }
+
+        .hidden-display {
+            display: none;
+        }
+
+        .h1, .h2, .h3, h1, h2, h3 {
+            color: #fff;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+
+        form label {
+            color: #ddd;
+        }
+
+        form input {
+            color: #555555;
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #1abc9c;
+            z-index: 9999;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            color: #000 !important;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: #fff !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #0f0 !important;
+            background-color: #999 !important;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: transparent;
+            color: #000 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-center">
+                <li><a id="menu_beton" href="#">BETON</a></li>
+                <li><a id="menu_kies" href="#">KIES</a></li>
+                <li><a id="menu_sonst" href="#">WAS WÄS ICH</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid bg-1 text-center">
+        <h1>Leons Baumeister Tools</h1>
+        <img src="img/home.jpg" class="img-circle" alt="Home" width="50" height="50">
+    </div>
+
+    <div id="beton" class="hidden-display main-container container-fluid text-center">
+        <h2>Betonberechnung</h2>
+        <p>Hier die Beschreibung, was überhaupt passiert</p>
+        <br/>
+        <form>
+            <div class="form-group form-group-lg">
+                <label for="beton-value1">Wert&nbsp;1</label>
+                <input type="number" step="0.01" id="beton-value1" class="form-control form-control-lg">
+            </div>
+            <div class="form-group form-group-lg">
+                <label for="beton-value2">Wert&nbsp;2</label>
+                <input type="number" step="0.01" id="beton-value2" class="form-control form-control-lg">
+            </div>
+            <br/>
+            <div class="form-group form-group-lg">
+                <label for="beton-result">Ergebnis</label>
+                <input type="number" readonly id="beton-result" class="form-control form-control-lg">
+            </div>
+            <br/>
+            <a id="beton_berechnen" href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-th"></span>
+                Berechnen</a>
+        </form>
+    </div>
+
+    <div id="kies" class="hidden-display main-container  container-fluid text-center">
+        <h2>Kiesberechnung</h2>
+        <p>Hier die Beschreibung, was überhaupt passiert</p>
+        <br/>
+        <form>
+            <div class="form-group form-group-lg">
+                <label for="kies-value1">Wert&nbsp;1</label>
+                <input type="number" step="0.01" id="kies-value1" class="form-control form-control-lg">
+            </div>
+            <div class="form-group form-group-lg">
+                <label for="kies-value2">Wert&nbsp;2</label>
+                <input type="number" step="0.01" id="kies-value2" class="form-control form-control-lg">
+            </div>
+            <br/>
+            <div class="form-group form-group-lg">
+                <label for="kies-result">Ergebnis</label>
+                <input type="number" readonly id="kies-result" class="form-control form-control-lg">
+            </div>
+            <br/>
+            <a id="kies_berechnen" href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-th"></span>
+                Berechnen</a>
+        </form>
+    </div>
+
+    <div id="sonst" class="hidden-display main-container container-fluid text-center">
+        <h2>Was wäs ich Berechnung</h2>
+        <p>Hier die Beschreibung, was überhaupt passiert</p>
+        <br/>
+        <form>
+            <div class="form-group form-group-lg">
+                <label for="sonst-value1">Wert&nbsp;1</label>
+                <input type="number" step="0.01" id="sonst-value1" class="form-control form-control-lg">
+            </div>
+            <div class="form-group form-group-lg">
+                <label for="sonst-value2">Wert&nbsp;2</label>
+                <input type="number" step="0.01" id="sonst-value2" class="form-control form-control-lg">
+            </div>
+            <br/>
+            <div class="form-group form-group-lg">
+                <label for="sonst-result">Ergebnis</label>
+                <input type="number" readonly id="sonst-result" class="form-control form-control-lg">
+            </div>
+            <br/>
+            <a id="sonst_berechnen" href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-th"></span>
+                Berechnen</a>
+         </form>
+    </div>
+
+</body>
+
+</html>

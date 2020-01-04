@@ -1,18 +1,22 @@
 // ****************************************************************************
-// Berechnung für Beton durchführen
-function computeBeton() {
+// Berechnung für Aushub durchführen
+function computeAushub() {
     var result = 0;
 
     debugger;
+
     // Werte aus den Feldern auslesen
-    var value1 = parseFloat( $("#beton-value1").val() );
-    var value2 = parseFloat( $("#beton-value2").val() );
+    var seite_a = parseFloat( $("#aushub-seite_a").val() );
+    var seite_b = parseFloat( $("#aushub-seite_b").val() );
+    var hoehe_ok_bp = parseFloat( $("#aushub-ok_bp").val() );
+    var dicke_bp = parseFloat( $("#aushub-dicke_bp").val() );    
+    var hoehenMittelwert = aushubHoheneMittelwert;
 
     // Ergebns berechnen
-    result =  value1 + value2;
+    result =  seite_a * seite_b;
 
     // Ergebnis ins Zielfeld schreiben
-    $("#beton-result").val(result);
+    $("#aushub-result").val(result.toFixed(0));
 }
 
 // ****************************************************************************
@@ -50,9 +54,49 @@ function computeSonst() {
 }
 
 // ****************************************************************************
+// Aushub: Höhenwert hinzufügen
+var aushubHoehen = [];
+var aushubHoheneMittelwert = 0;
+function aushubAddHoehe() {
+    debugger;
+    var new_hoehe = parseFloat( $("#aushub-new_hoehe").val() );
+    if (!new_hoehe || (new_hoehe <= 0)) {return;} 
+    var index = aushubHoehen.length;
+    aushubHoehen[index] = new_hoehe;
+    $("#aushubHoehenWerte tbody").empty();
+    var summe = 0;
+    for (var i = 0; i < aushubHoehen.length; i++) {
+        $("#aushubHoehenWerte tbody").append(
+            "<tr><td>" + aushubHoehen[i] + "</td><td>" +
+            "<button type='button' " +
+            "onclick='aushubDeleteHoehe(this, " + i + ");' " +
+            "class='btn btn-default'>" +
+            "<span class='glyphicon glyphicon-remove' />" +
+            "</button>" +
+            "</td></tr>"
+        );
+        summe += aushubHoehen[i];
+    }
+    var anzahl = aushubHoehen.length;
+    aushubHoheneMittelwert = summe / anzahl;
+    $("#aushubHoehenWerte tbody").append(
+        "<tr><td><strong>Mittelwert:&nbsp;" + aushubHoheneMittelwert.toFixed(1) + "</strong></td></tr>"
+    );
+    
+    $("#aushub-new_hoehe").val("");
+}
+
+// ****************************************************************************
+// Aushub: Höhenwert hinzufügen
+function aushubDeleteHoehe(ctl, index) {
+    $(ctl).parents("tr").remove();
+    aushubHoehen.splice(index, 1);
+}
+
+// ****************************************************************************
 // Berechnungsseite ändern
 function showMenu(menu) {
-    $("#beton").hide();
+    $("#aushub").hide();
     $("#kies").hide();
     $("#sonst").hide();
     $("#" + menu).show();    
@@ -61,13 +105,16 @@ function showMenu(menu) {
 // ****************************************************************************
 // Initialisierung nach dem Laden der Seite
 $( document ).ready(function() {
-    showMenu("beton");
+    showMenu("aushub");
     
-    $("#menu_beton").click(function () { showMenu("beton"); });
+    $("#menu_aushub").click(function () { showMenu("aushub"); });
     $("#menu_kies" ).click(function () { showMenu("kies" ); });
     $("#menu_sonst").click(function () { showMenu("sonst"); });
     
-    $("#beton_berechnen").click(function () { computeBeton(); });
+    $("#aushub_berechnen").click(function () { computeAushub(); });
     $("#kies_berechnen" ).click(function () { computeKies();  });
     $("#sonst_berechnen").click(function () { computeSonst(); });
+
+    $("#aushub_hoehe_hinzu").click(function () { aushubAddHoehe(); });
+    $("#aushubHoehenWerte tbody").empty();
 });

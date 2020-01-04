@@ -21,7 +21,8 @@
         }
 
         .main-container {
-            width: fit-content;
+            widthxxx: fit-content;
+            width:600px;
             background-color: #474e5d;
             color: #aaaaaa;
         }
@@ -41,6 +42,10 @@
             margin-top: 8px;
             margin-bottom: 10px;
         }
+
+        td {
+            padding:0 5px 3px 5px;
+        }        
 
         form label {
             color: #ddd;
@@ -91,39 +96,72 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-center">
-                <li><a id="menu_beton" href="#">BETON</a></li>
-                <li><a id="menu_kies" href="#">KIES</a></li>
-                <li><a id="menu_sonst" href="#">WAS WÄS ICH</a></li>
+                <li><a id="menu_aushub" href="#">AUSHUB</a></li>
+               <!-- <li><a id="menu_kies" href="#">KIES</a></li>
+                <li><a id="menu_sonst" href="#">WAS WÄS ICH</a></li> -->
             </ul>
         </div>
     </nav>
 
     <div class="container-fluid bg-1 text-center">
-        <h1>Leons Baumeister Tools</h1>
-        <img src="img/home.jpg" class="img-circle" alt="Home" width="50" height="50">
+        <h1>Leons Baumeister Tools
+        <img src="img/home.jpg" class="img-circle" alt="Home" width="50" height="50"></h1>
     </div>
 
-    <div id="beton" class="hidden-display main-container container-fluid text-center">
-        <h2>Betonberechnung</h2>
-        <p>Hier die Beschreibung, was überhaupt passiert</p>
+    <div id="aushub" class="hidden-display main-container container-fluid text-center">
+        <h2>Aushubberechnung&nbsp;<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#aushubDescription" aria-expanded="false" aria-controls="aushubDescription">Beschreibung</button></h2>
+        <div class="collapse" id="aushubDescription">
+            <div class="card card-body">
+                Hier die Beschreibung, was überhaupt passiert. Hier die Beschreibung, was überhaupt passiert. Hier die Beschreibung, was überhaupt passiert. Hier die Beschreibung, was überhaupt passiert. 
+                Hier die Beschreibung, was überhaupt passiert. Hier die Beschreibung, was überhaupt passiert. Hier die Beschreibung, was überhaupt passiert.
+                <br/>
+                Vielleicht auch ein Bildchen...
+            </div>
+        </div>
         <br/>
         <form>
-            <div class="form-group form-group-lg">
-                <label for="beton-value1">Wert&nbsp;1</label>
-                <input type="number" step="0.01" id="beton-value1" class="form-control form-control-lg">
+            <div class="form-group row form-group-lg">
+                <div class="col-sm-6">
+                    <label for="aushub-value1">Bodenplatte&nbsp;Seite&nbsp;a</label>
+                    <input type="number" step="0.01" id="aushub-seite_a" class="form-control form-control-lg">
+                </div>
+                <div class="col-sm-6">
+                    <label for="aushub-value1">Bodenplatte&nbsp;Seite&nbsp;b</label>
+                    <input type="number" step="0.01" id="aushub-seite_b" class="form-control form-control-lg">
+                </div>
             </div>
-            <div class="form-group form-group-lg">
-                <label for="beton-value2">Wert&nbsp;2</label>
-                <input type="number" step="0.01" id="beton-value2" class="form-control form-control-lg">
+            <div class="form-group row form-group-lg">
+                <div class="col-sm-6">
+                    <label for="aushub-value2">Höhe Oberkante Betonplatte </label>
+                    <input type="number" step="0.01" id="aushub-ok_bp" class="form-control form-control-lg">
+                </div>
+                <div class="col-sm-6">
+                    <label for="aushub-value2">Dicke Betonplatte </label>
+                    <input type="number" step="0.01" id="aushub-dicke_bp" class="form-control form-control-lg">
+                </div>
+            </div>
+            <div class="form-group row form-group-lg">
+                <div class="col-sm-6">
+                    <label for="aushub-value2">Höhenmessung hinzufügen</label>
+                    <div class="input-group input-group-lg" style="display:flex;">
+                        <input type="number" step="0.01" id="aushub-new_hoehe" class="form-control form-control-lg">
+                        <span class="input-group-text"><a id="aushub_hoehe_hinzu" href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-plus"></span></a></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="aushub-value2">Höhenwerte</label>
+                    <table align="center" id="aushubHoehenWerte">
+                        <tr><td><strong>Mittlere Höhe: 0</strong></td></tr>
+                    </table align="center">
+                </div>
             </div>
             <br/>
             <div class="form-group form-group-lg">
-                <label for="beton-result">Ergebnis</label>
-                <input type="number" readonly id="beton-result" class="form-control form-control-lg">
+                <label for="aushub-result">Aushub m<sup>3</sup></label>
+                <input type="number" readonly id="aushub-result" class="form-control form-control-lg">
             </div>
             <br/>
-            <a id="beton_berechnen" href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-th"></span>
-                Berechnen</a>
+            <a id="aushub_berechnen" href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-th"></span>&nbsp;Berechnen</a>
         </form>
     </div>
 

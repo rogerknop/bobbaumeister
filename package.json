@@ -1,0 +1,25 @@
+{
+  "name": "bobbaumeister",
+  "version": "1.0.0",
+  "description": "Berechnungen für Bauingenieure",
+  "main": "site/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-contrib-connect": "^2.1.0",
+    "grunt-contrib-watch": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogerknop/bobbaumeister.git"
+  },
+  "author": "Leon Knop",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rogerknop/bobbaumeister/issues"
+  },
+  "homepage": "https://github.com/rogerknop/bobbaumeister#readme",
+  "dependencies": {}
+}

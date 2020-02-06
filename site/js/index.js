@@ -13,7 +13,13 @@ function computeAushub() {
     var hoehenMittelwert = aushubHoheneMittelwert;
 
     // Ergebns berechnen
+    var baugrubenSohle = hoehe_ok_bp - dicke_bp;
+    var baugrubenTiefe = hoehenMittelwert - baugrubenSohle;
+    var flaeche = (seite_a + 1) * (seite_b + 1);
+
     result =  seite_a * seite_b;
+
+    //Math.tan(30 * Math.PI/180)
 
     // Ergebnis ins Zielfeld schreiben
     $("#aushub-result").val(result.toFixed(0));

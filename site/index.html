@@ -119,7 +119,7 @@
             </div>
         </div>
         <br/>
-        <form>
+        <form id="#form">
             <div class="form-group row form-group-lg">
                 <div class="col-sm-6">
                     <label for="aushub-value1">Bodenplatte&nbsp;Seite&nbsp;a</label>
@@ -132,11 +132,11 @@
             </div>
             <div class="form-group row form-group-lg">
                 <div class="col-sm-6">
-                    <label for="aushub-value2">Höhe Oberkante Betonplatte </label>
+                    <label for="aushub-value2">Höhe Oberkante Bodenplatte </label>
                     <input type="number" step="0.01" id="aushub-ok_bp" class="form-control form-control-lg">
                 </div>
                 <div class="col-sm-6">
-                    <label for="aushub-value2">Dicke Betonplatte </label>
+                    <label for="aushub-value2">Dicke Bodenplatte </label>
                     <input type="number" step="0.01" id="aushub-dicke_bp" class="form-control form-control-lg">
                 </div>
             </div>
@@ -151,7 +151,9 @@
                 <div class="col-sm-6">
                     <label for="aushub-value2">Höhenwerte</label>
                     <table align="center" id="aushubHoehenWerte">
-                        <tr><td><strong>Mittlere Höhe: 0</strong></td></tr>
+                        <tbody>
+                            <tr><td><strong>Mittlere Höhe: 0</strong></td></tr>
+                        </tbody>
                     </table align="center">
                 </div>
             </div>
@@ -161,6 +163,7 @@
                 <input type="number" readonly id="aushub-result" class="form-control form-control-lg">
             </div>
             <br/>
+            <a id="aushub_reset"     href="#" class="btn btn-default btn-lg">Zurücksetzen</a>
             <a id="aushub_berechnen" href="#" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-th"></span>&nbsp;Berechnen</a>
         </form>
     </div>

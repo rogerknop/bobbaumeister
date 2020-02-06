@@ -1,28 +1,22 @@
 // ****************************************************************************
 // Berechnung für Aushub durchführen
 function computeAushub() {
-    var result = 0;
-
-    debugger;
-
     // Werte aus den Feldern auslesen
-    var seite_a = parseFloat( $("#aushub-seite_a").val() );
-    var seite_b = parseFloat( $("#aushub-seite_b").val() );
-    var hoehe_ok_bp = parseFloat( $("#aushub-ok_bp").val() );
-    var dicke_bp = parseFloat( $("#aushub-dicke_bp").val() );    
+    var seite_a = getNumber("#aushub-seite_a");
+    var seite_b = getNumber("#aushub-seite_b");
+    var hoehe_ok_bp = getNumber("#aushub-ok_bp");
+    var dicke_bp = getNumber("#aushub-dicke_bp");    
     var hoehenMittelwert = aushubHoheneMittelwert;
 
     // Ergebns berechnen
     var baugrubenSohle = hoehe_ok_bp - dicke_bp;
     var baugrubenTiefe = hoehenMittelwert - baugrubenSohle;
     var flaeche = (seite_a + 1) * (seite_b + 1);
-
-    result =  seite_a * seite_b;
-
-    //Math.tan(30 * Math.PI/180)
+    var boeschung = 0.5 * baugrubenTiefe * (Math.tan(30 * Math.PI/180) * baugrubenTiefe) * (2 * seite_a + 2 * seite_b + 2);
+    var aushub = flaeche * baugrubenTiefe + boeschung;
 
     // Ergebnis ins Zielfeld schreiben
-    $("#aushub-result").val(result.toFixed(0));
+    $("#aushub-result").val(aushub.toFixed(4));
 }
 
 // ****************************************************************************
@@ -60,12 +54,26 @@ function computeSonst() {
 }
 
 // ****************************************************************************
+// Zahl ermitteln
+function getNumber(id) {
+    var value = 0;
+    var stringValue = $(id).val();
+    stringValue = stringValue.replace(",",".");
+    if (!isNaN(parseFloat(stringValue))) {
+        value = parseFloat(stringValue);
+        $(id).val("");
+        //stringValue = stringValue.replace(".",",");
+        $(id).val(stringValue);
+    }
+    return value;
+}
+
+// ****************************************************************************
 // Aushub: Höhenwert hinzufügen
 var aushubHoehen = [];
 var aushubHoheneMittelwert = 0;
 function aushubAddHoehe() {
-    debugger;
-    var new_hoehe = parseFloat( $("#aushub-new_hoehe").val() );
+    var new_hoehe = getNumber("#aushub-new_hoehe");
     if (!new_hoehe || (new_hoehe <= 0)) {return;} 
     var index = aushubHoehen.length;
     aushubHoehen[index] = new_hoehe;
@@ -89,7 +97,7 @@ function updateAushubHoehen() {
     var summe = 0;
     for (var i = 0; i < aushubHoehen.length; i++) {
         $("#aushubHoehenWerte tbody").append(
-            "<tr><td>" + aushubHoehen[i] + "</td><td>" +
+            "<tr><td>" + aushubHoehen[i].toLocaleString("de-DE", {minimumFractionDigits:3}) + "</td><td>" +
             "<button type='button' " +
             "onclick='aushubDeleteHoehe(this, " + i + ");' " +
             "class='btn btn-default'>" +
@@ -100,12 +108,34 @@ function updateAushubHoehen() {
         summe += aushubHoehen[i];
     }
     var anzahl = aushubHoehen.length;
-    aushubHoheneMittelwert = summe / anzahl;
+    if (anzahl > 0) {
+        aushubHoheneMittelwert = summe / anzahl;
+    }
+    else {
+        aushubHoheneMittelwert = 0;
+    }
     $("#aushubHoehenWerte tbody").append(
-        "<tr><td><strong>Mittelwert:&nbsp;" + aushubHoheneMittelwert.toFixed(1) + "</strong></td></tr>"
+        "<tr><td colspan='2'><strong>Mittelwert:&nbsp;" + aushubHoheneMittelwert.toLocaleString("de-DE", {minimumFractionDigits:3}) + "</strong></td></tr>"
     );
     
     $("#aushub-new_hoehe").val("");
+}
+
+// ****************************************************************************
+// Aushub: Werte zurücksetzen
+function resetAushub(ctl, index) {
+    var seite_a = getNumber("#aushub-seite_a");
+    var seite_b = getNumber("#aushub-seite_b");
+    var hoehe_ok_bp = getNumber("#aushub-ok_bp");
+    var dicke_bp = getNumber("#aushub-dicke_bp");    
+    $("#aushub-seite_a").val("");
+    $("#aushub-seite_b").val("");
+    $("#aushub-ok_bp").val("");
+    $("#aushub-dicke_bp").val("");
+    $("#aushub-new_hoehe").val("");
+    $("#aushub-result").val("");
+    aushubHoehen = [];
+    updateAushubHoehen();
 }
 
 // ****************************************************************************
@@ -126,10 +156,23 @@ $( document ).ready(function() {
     $("#menu_kies" ).click(function () { showMenu("kies" ); });
     $("#menu_sonst").click(function () { showMenu("sonst"); });
     
+    $("#aushub_reset").click(function () { resetAushub(); });
+
     $("#aushub_berechnen").click(function () { computeAushub(); });
     $("#kies_berechnen" ).click(function () { computeKies();  });
     $("#sonst_berechnen").click(function () { computeSonst(); });
 
     $("#aushub_hoehe_hinzu").click(function () { aushubAddHoehe(); });
     $("#aushubHoehenWerte tbody").empty();
+
+    $(document).keypress(function(e){
+        if(e.keyCode==13) {
+            if (e.target.id==="aushub-new_hoehe") {
+                aushubAddHoehe();
+            }
+            else {
+                computeAushub();
+            }
+        }
+    });
 });

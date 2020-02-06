@@ -63,6 +63,22 @@ function aushubAddHoehe() {
     if (!new_hoehe || (new_hoehe <= 0)) {return;} 
     var index = aushubHoehen.length;
     aushubHoehen[index] = new_hoehe;
+
+    updateAushubHoehen();
+}
+
+// ****************************************************************************
+// Aushub: Höhenwert hinzufügen
+function aushubDeleteHoehe(ctl, index) {
+    $(ctl).parents("tr").remove();
+    aushubHoehen.splice(index, 1);
+
+    updateAushubHoehen();
+}
+
+// ****************************************************************************
+// Aushub: Update berechneten Wert
+function updateAushubHoehen() {
     $("#aushubHoehenWerte tbody").empty();
     var summe = 0;
     for (var i = 0; i < aushubHoehen.length; i++) {
@@ -84,13 +100,6 @@ function aushubAddHoehe() {
     );
     
     $("#aushub-new_hoehe").val("");
-}
-
-// ****************************************************************************
-// Aushub: Höhenwert hinzufügen
-function aushubDeleteHoehe(ctl, index) {
-    $(ctl).parents("tr").remove();
-    aushubHoehen.splice(index, 1);
 }
 
 // ****************************************************************************
